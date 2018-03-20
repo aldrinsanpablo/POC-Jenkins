@@ -41,8 +41,10 @@ pipeline {
 }
 
 def getDbProperties(xmlString) {
-echo 'calling getDbProperties'
+  echo 'calling getDbProperties'
     def arrProperties = [:]
+    
+    try {
     def groovy.util.Node schemas = new XmlParser().parseText(xmlString)
     
     schemas.each { schema ->
@@ -52,30 +54,19 @@ echo 'calling getDbProperties'
         
         def groovy.util.Node dbs = schema.database
         dbs.each { db ->
-            try {
+            
                 def dbName = db.@name
                 echo dbName
                 if ( dbName != null && dbName != "" ) {
                     arrProperties[schemaName][dbName] = db.text()
                 }
-            } catch ( e ) {
-                echo e
-            }
+            
         }
         
     }
+    } catch ( e ) {
+       echo e
+    }
     
-    /*
-    def n1 = schemas.schema[0].database[0].@name
-    //println n1
-    echo n1
-    assert n1 == 'deva'
-    println schemas.schema[0].database.system.text()
-    //echo list.database.system
-    def prop = [:]
-    prop['1'] = [:]
-    prop['1']['1'] = "test"
-    return prop
-    */
     return arrProperties
 }

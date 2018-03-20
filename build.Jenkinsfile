@@ -1,4 +1,6 @@
-node {
+pipeline {
+  agent any
+  
   def xmlText = '''
 <schemas>
  <schema name="lgstcs">

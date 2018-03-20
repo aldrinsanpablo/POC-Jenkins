@@ -9,8 +9,7 @@ pipeline {
    <property name="name">devadwh</property>
    <property name="user">devadwh</property>
    <property name="pass">Devadwh123</property>
-   <property name="host">dev01-tky-bidwh-ariake2-fr.clscmzfgj3i3.ap-northeast-1.redshift.amazonaws.com</property>
-   <property name="port">5439</property>
+   <property name="host">dev01-tky-bidwh-ariake2-fr.clscmzfgj3i3.ap-northeast-1.redshift.amazonaws.com</property   <property name="port">5439</property>
    <property name="pack">dwh</property>
    <property name="dbmainuser"></property>
   </database>
@@ -31,7 +30,7 @@ pipeline {
   '''
   
   stage('SetUp') {
-    //echo "${xmlText}"
+    echo "${xmlText}"
     def prop_a = getDbProperties(xmlText)
     //echo prop_a['1']['1']
    }

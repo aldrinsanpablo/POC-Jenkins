@@ -41,6 +41,7 @@ pipeline {
 }
 
 def getDbProperties(xmlString) {
+echo 'calling getDbProperties'
     def arrProperties = [:]
     def groovy.util.Node schemas = new XmlParser().parseText(xmlString)
     

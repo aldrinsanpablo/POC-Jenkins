@@ -42,6 +42,11 @@ pipeline {
     echo "3"
    }
    */
+   post {
+        success  { cleanWs() }
+        unstable { cleanWs() }
+        failure  { cleanWs() }
+   }
 }
 
 def getDbProperties(xmlString) {

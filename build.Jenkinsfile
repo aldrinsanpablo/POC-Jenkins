@@ -1,7 +1,4 @@
-pipeline {
-  agent any
-  
-  def xmlText = '''
+def xmlText = '''
 <schemas>
  <schema name="lgstcs">
   <database name="deva">
@@ -9,7 +6,8 @@ pipeline {
    <property name="name">devadwh</property>
    <property name="user">devadwh</property>
    <property name="pass">Devadwh123</property>
-   <property name="host">dev01-tky-bidwh-ariake2-fr.clscmzfgj3i3.ap-northeast-1.redshift.amazonaws.com</property   <property name="port">5439</property>
+   <property name="host">dev01-tky-bidwh-ariake2-fr.clscmzfgj3i3.ap-northeast-1.redshift.amazonaws.com</property>
+   <property name="port">5439</property>
    <property name="pack">dwh</property>
    <property name="dbmainuser"></property>
   </database>
@@ -29,24 +27,16 @@ pipeline {
 </schemas>
   '''
   
-  stage('SetUp') {
-    echo "${xmlText}"
-    def prop_a = getDbProperties(xmlText)
-    //echo prop_a['1']['1']
-   }
-   /*
-   stage('Validate') {
-    echo "2"
-   }
-   stage('TearDown') {
-    echo "3"
-   }
-   */
-   post {
-        success  { cleanWs() }
-        unstable { cleanWs() }
-        failure  { cleanWs() }
-   }
+pipeline {
+  agent any
+  
+  stages {
+    stage('Stage 1') {
+        steps {
+            echo "Hello World!"
+        }
+    }
+  }
 }
 
 def getDbProperties(xmlString) {
